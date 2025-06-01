@@ -10,3 +10,4 @@ Route::get('/', function () {
 
 Route::get('/Login', [LoginController::class, 'login'])->name('login');
 Route::get('/dashboardAdmin', [DashboardController::class, 'dashboard_admin'])->name('dashboard_admin');
+Route::get('/mencoba', [DashboardController::class, 'mencoba'])->name('beranda');
