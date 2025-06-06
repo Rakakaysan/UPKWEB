@@ -1,181 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>List Daftar Tugas Siswa</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-    }
+<!-- resources/views/siswa/tugas.blade.php -->
 
-    .sidebar {
-      background-color: #f4a25c;
-      width: 200px;
-      height: 100vh;
-      padding: 20px 10px;
-      box-sizing: border-box;
-    }
+@extends('layouts.siswa')
 
-    .sidebar a {
-      display: block;
-      text-decoration: none;
-      color: black;
-      padding: 10px;
-      margin: 5px 0;
-    }
+@section('content')
+<div class="p-8">
+  <h1 class="text-3xl font-semibold text-[#5C1D0E] mb-1">List Daftar Tugas Siswa</h1>
+  <p class="text-sm text-gray-700 mb-6">Senin 17 Februari 2025</p>
 
-    .sidebar a:hover {
-      background-color: #d88b4e;
-    }
-
-    .main {
-      flex-grow: 1;
-      background-color: #fff3e1;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .main button {
-      margin-bottom: 15px;
-      padding: 8px 16px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      cursor: pointer;
-    }
-
-    .main h2 {
-      margin-bottom: 5px;
-    }
-
-    .main .subtitle {
-      font-size: 14px;
-      color: gray;
-      margin-bottom: 15px;
-    }
-
-    .container {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .left {
-      width: 60%;
-    }
-
-    .right {
-      width: 35%;
-    }
-
-    textarea {
-      width: 100%;
-      height: 60px;
-      padding: 10px;
-      font-family: Arial;
-      font-size: 14px;
-      resize: none;
-    }
-
-    .label {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .answer {
-      margin-top: 10px;
-      background-color: #eee;
-      padding: 10px;
-      font-size: 14px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .search-box {
-      margin-bottom: 10px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 6px;
-      margin-top: 4px;
-      box-sizing: border-box;
-    }
-
-    .submit-btn {
-      margin-top: 10px;
-      padding: 8px 14px;
-      background-color: #ddd;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="sidebar">
-    <img src="simba_logo.png" alt="SIMBA Logo" style="width: 100%; margin-bottom: 20px;">
-    <a href="#">Kompetensi Dan Tujuan</a>
-    <a href="#">Materi</a>
-    <a href="#">Tugas</a>
-    <a href="#">Tentang Aplikasi Dan Pengembang</a>
-    <a href="#">Keluar Apk</a>
-  </div>
-
-  <div class="main">
-    <button onclick="location.reload()">Refresh Data</button>
-    <h2>List Daftar Tugas <span style="font-weight: normal;">Siswa</span></h2>
-    <div class="subtitle">Kamis, 22 Mei 2025</div>
-
-    <div class="container">
-      <div class="left">
-        <div class="label">Konten Tugas</div>
-        <textarea readonly>carilah berbagai jenis candi di indonesia, boleh di internet</textarea>
-
-        <div class="label">Jawaban Tugas</div>
-        <div class="answer">
-          mencari berbagai jenis candi yang ada di indonesia<br>
-          <em>Belum Dikumpulkan</em>
+  <div class="flex gap-6">
+    <div class="flex-1 space-y-6">
+      <!-- Kartu Tugas 1 -->
+      <div class="bg-white rounded-2xl shadow-md p-4 border-l-8 border-red-500">
+        <h2 class="text-lg font-bold text-[#3A1008]">Mempelajari Sejarah Candi Borobudur</h2>
+        <p class="text-sm text-gray-700">Deskripsi: Baca materi tentang sejarah Candi Borobudur dan buat ringkasan.</p>
+        <div class="mt-2 flex justify-between items-center">
+          <span class="text-sm text-red-500 font-semibold">Status: Belum Selesai</span>
+          <button class="bg-red-500 text-white text-sm px-3 py-1 rounded-xl">Tandai Selesai</button>
         </div>
-
-        <button class="submit-btn">Kumpulkan</button>
       </div>
 
-      <div class="right">
-        <div class="search-box">
-          <label for="search">Search</label>
-          <input type="text" id="search" placeholder="Cari tugas...">
+      <!-- Kartu Tugas 2 -->
+      <div class="bg-white rounded-2xl shadow-md p-4 border-l-8 border-green-500">
+        <h2 class="text-lg font-bold text-[#3A1008]">Menyelesaikan Soal Candi Prambanan</h2>
+        <p class="text-sm text-gray-700">Deskripsi: Kerjakan soal tentang Candi Prambanan yang ada di halaman 30 buku.</p>
+        <div class="mt-2 flex justify-between items-center">
+          <span class="text-sm text-green-600 font-semibold">Status: Selesai</span>
+          <button class="bg-green-600 text-white text-sm px-3 py-1 rounded-xl">Tandai Selesai</button>
         </div>
-        <table>
-          <tr>
-            <th>Nama Tugas</th>
-            <th>Tgl Dibuat</th>
-            <th>Tgl Diubah</th>
-          </tr>
-          <tr>
-            <td>peninggalan candi hindu budha</td>
-            <td>30/04/2025</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>mencari berbagai jenis candi yang ada di indonesia</td>
-            <td>26/04/2025</td>
-            <td>30/04/2025</td>
-          </tr>
-        </table>
       </div>
     </div>
-  </div>
 
-</body>
-</html>
+    <!-- Sidebar jumlah tugas -->
+    <div class="bg-white rounded-2xl shadow-md w-36 h-fit p-4 flex flex-col justify-center items-center">
+      <span class="text-3xl font-bold text-green-700">90</span>
+      <span class="text-sm text-gray-600 text-center">Tugas selesai</span>
+    </div>
+  </div>
+</div>
+@endsection
