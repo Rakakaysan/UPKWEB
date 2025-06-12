@@ -4,41 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\PengumpulanTugas;
+use App\Models\materiPembelajaran;
 
 class MateriController extends Controller
 {
-    /**
-     * Menampilkan daftar materi pembelajaran
-     */
-    public function materi_pembelajaran()
+    // view
+    public function index()
     {
-        $materi = PengumpulanTugas::all();
-        return view('Admin.materi_pembelajaran', ['materi' => $materi]);
+        $materi = materiPembelajaran::orderBy('nama_materi')->paginate(10);
+        return view('admin.materi_pembelajaran', ['materi' => $materi]);
     }
 
-    /**
-     * Menampilkan form untuk membuat materi baru
-     */
-    public function CreatePengumpulanTugas()
+    public function create()
     {
-        return view('Admin.create.create_PengumpulanTugas');
+        return view('admin.create.create_materi_pembelajaran');
     }
 
-
-    /**
-     * Menampilkan form untuk mengedit materi
-     */
     public function edit($id)
     {
-        $materi = PengumpulanTugas::findOrFail($id);
-        return view('Admin.update.edit_PengumpulanTugas', ['materi' => $materi]);
+        $materi = materiPembelajaran::findOrFail($id);
+        return view('admin.update.edit_materi_pembelajaran', ['materi' => $materi]);
     }
 
-
-    /**
-     * Menyimpan materi baru ke database
-     */
+    // actions
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -54,16 +42,13 @@ class MateriController extends Controller
                 ->withInput();
         }
 
-        PengumpulanTugas::create($request->all());
+        materiPembelajaran::create($request->all());
 
         return redirect()
-            ->route('materi_pembelajaran')
+            ->route('materi_pembelajaran.index')
             ->with('success', 'Materi berhasil ditambahkan!');
     }
 
-    /**
-     * Mengupdate materi di database
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -79,21 +64,21 @@ class MateriController extends Controller
                 ->withInput();
         }
 
-        $materi = PengumpulanTugas::findOrFail($id);
+        $materi = materiPembelajaran::findOrFail($id);
         $materi->update($request->all());
 
         return redirect()
-            ->route('materi_pembelajaran')
+            ->route('materi_pembelajaran.index')
             ->with('success', 'Materi berhasil diperbarui!');
     }
 
     public function delete($id)
     {
         try {
-            $pengguna = PengumpulanTugas::findOrFail($id);
+            $pengguna = materiPembelajaran::findOrFail($id);
             $pengguna->delete();
 
-            return redirect()->route('materi_pembelajaran')
+            return redirect()->route('materi_pembelajaran.index')
                 ->with('success', 'Pengguna berhasil dihapus');
         } catch (\Exception $e) {
             return redirect()->back()

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('tugas', function (Blueprint $table) {
-        $table->bigIncrements('id_tugas'); // Pastikan ini adalah primary key
-        $table->string('nama_tugas');
-        $table->string('deskripsi_tugas');
-        $table->bigInteger('tanggal_dibuat');
-        $table->bigInteger('tanggal_diubah');
+            $table->bigIncrements('id_tugas'); // Pastikan ini adalah primary key
+            $table->string('nama_tugas');
+            $table->string('deskripsi_tugas');
+            $table->dateTime('tanggal_dibuat');
+            $table->dateTime('tanggal_diubah');
         });
 
         Schema::enableForeignKeyConstraints();

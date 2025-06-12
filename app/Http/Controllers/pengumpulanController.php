@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class pengumpulanController extends Controller
+class PengumpulanController extends Controller
 {
     public function pengumpulan_tugas()
     {
-        return view('Admin.pengumpulan_tugas');
+        return view('admin.pengumpulan_tugas');
     }
     public function CreatePengumpulanTugas()
     {
-        return view('Admin.create.create_PengumpulanTugas');
+        return view('admin.create.create_PengumpulanTugas');
     }
     public function EditPengumpulanTugasp()
     {
-        return view('Admin.create.Edit_pengumpulanTugas');
+        return view('admin.create.Edit_pengumpulanTugas');
     }
 
 

@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Dashboard admin')
 
 @section('main')
 <div id="layoutSidenav">
@@ -26,11 +26,11 @@
                     <div class="card-body bg-primary bg-opacity-10 rounded-3">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h2 class="card-title">Welcome back, Admin!</h2>
+                                <h2 class="card-title">Welcome back, admin!</h2>
                                 <p class="card-text text-muted">Here's what's happening with your platform today.</p>
                             </div>
                             <div class="col-md-4 text-center">
-                                <img src="https://cdn-icons-png.flaticon.com/512/921/921276.png" width="120" alt="Admin Logo" class="img-fluid">
+                                <img src="https://cdn-icons-png.flaticon.com/512/921/921276.png" width="120" alt="admin Logo" class="img-fluid">
                             </div>
                         </div>
                     </div>
