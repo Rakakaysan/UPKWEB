@@ -3,27 +3,21 @@
 @section('title', 'Manajemen Pengguna')
 
 @section('main')
-
-    <head>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    </head>
-
     <div id="layoutSidenav">
         @include('template.sidebar_admin')
-@endsection
+    @endsection
     <div id="layoutSidenav_content" style="padding-left: 20%;">
         <main class="py-4 px-4">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">📘 Manajemen Pengguna</h2>
-                    <a href="{{ route('CreateManajemenPengguna') }}" class="btn btn-primary">➕ Tambah Pengguna</a>
+                    <h2 class="mb-0">🚗 Manajemen Pengguna</h2>
+                    <a href="{{ route('manajemen_pengguna.create') }}" class="btn btn-primary">➕ Tambah Pengguna</a>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <div class="table-responsive">
                             @isset($pengguna)
-                                @if($pengguna->isEmpty())
+                                @if ($pengguna->isEmpty())
                                     <div class="text-center py-8">
                                         <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
                                         <p class="text-gray-600">Belum ada data pengguna</p>
@@ -41,7 +35,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($pengguna as $index => $user)
+                                            @foreach ($pengguna as $index => $user)
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $user->nama_lengkap }}</td>
@@ -55,13 +49,15 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <!-- Tombol Edit -->
-                                                            <a href="{{ route('edit', $user->manajemen_id) }}"
-                                                                class="btn btn-sm btn-warning">
-                                                                <i class="fas fa-edit"></i> Edit
-                                                            </a>
-
-                                                            <form action="{{ route('delete', $user->manajemen_id) }}" method="POST"
+                                                            <div>
+                                                                <a href="{{ route('manajemen_pengguna.edit', ['id' => $user->manajemen_id]) }}"
+                                                                    class="btn btn-sm btn-warning">
+                                                                    <i class="fas fa-edit"></i> Edit
+                                                                </a>
+                                                            </div>
+                                                            <form
+                                                                action="{{ route('manajemen_pengguna.delete', ['id' => $user->manajemen_id]) }}"
+                                                                method="POST"
                                                                 onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -69,6 +65,7 @@
                                                                     <i class="fas fa-trash"></i> Hapus
                                                                 </button>
                                                             </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -82,7 +79,7 @@
                                 </div>
                             @endisset
 
-                            @if(isset($pengguna) && $pengguna->hasPages())
+                            @if (isset($pengguna) && $pengguna->hasPages())
                                 <div class="mt-4">
                                     {{ $pengguna->links() }}
                                 </div>

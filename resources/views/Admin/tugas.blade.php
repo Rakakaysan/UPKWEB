@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Materi Pembelajaran')
+@section('title', 'Tugas')
 
 @section('main')
     <div id="layoutSidenav">
@@ -10,51 +10,45 @@
         <main class="py-4 px-4">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">📘 Materi Pembelajaran</h2>
-                    <a href="{{ route('materi_pembelajaran.create') }}" class="btn btn-primary">➕ Tambah Materi</a>
+                    <h2 class="mb-0">🚙 Tugas</h2>
+                    <a href="{{ route('tugas.create') }}" class="btn btn-primary">➕ Tambah Tugas</a>
                 </div>
 
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <div class="table-responsive">
-                            @isset($materi)
-                                @if ($materi->isEmpty())
+                            @isset($tugas)
+                                @if ($tugas->isEmpty())
                                     <div class="text-center py-8">
                                         <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
-                                        <p class="text-gray-600">Belum ada data materi pembelajaran</p>
+                                        <p class="text-gray-600">Belum ada data tugas</p>
                                     </div>
                                 @else
                                     <table class="table table-striped table-hover align-middle mb-0">
                                         <thead class="table-dark">
                                             <tr>
                                                 <th style="width: 5%;">#</th>
-                                                <th style="width: 25%;">Nama Materi</th>
-                                                <th style="width: 30%;">Deskripsi</th>
-                                                <th style="width: 20%;">URL YouTube</th>
+                                                <th style="width: 25%;">Nama Tugas</th>
+                                                <th style="width: 30%;">Deskripsi Tugas</th>
                                                 <th style="width: 20%;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($materi as $index => $materis)
+                                            @foreach ($tugas as $index => $tugass)
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $materis->nama_materi }}</td>
-                                                    <td>{{ $materis->konten_materi }}</td>
-                                                    <td>
-                                                        <a href="{{ $materis->url_youtube }}" target="_blank"
-                                                            class="btn btn-sm btn-primary">Tonton Video</a>
-                                                    </td>
+                                                    <td>{{ $tugass->nama_tugas }}</td>
+                                                    <td>{{ $tugass->deskripsi_tugas }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <div>
-                                                                <a href="{{ route('materi_pembelajaran.edit', ['id' => $materis->id_materi]) }}"
+                                                                <a href="{{ route('tugas.edit', ['id' => $tugass->id_tugas]) }}"
                                                                     class="btn btn-sm btn-warning w-100"><i
                                                                         class="fas fa-edit"></i>Edit</a>
                                                             </div>
-                                                            <form
-                                                                action="{{ route('materi_pembelajaran.delete', $materis->id_materi) }}"
+                                                            <form action="{{ route('tugas.delete', $tugass->id_tugas) }}"
                                                                 method="POST"
-                                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus materi pembelajaran ini?')">
+                                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus tugas ini?')">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm btn-danger w-100">
@@ -76,9 +70,9 @@
                                 </div>
                             @endisset
 
-                            @if (isset($materi) && $materi->hasPages())
+                            @if (isset($tugas) && $tugas->hasPages())
                                 <div class="mt-4">
-                                    {{ $materi->links() }}
+                                    {{ $tugas->links() }}
                                 </div>
                             @endif
                         </div>
