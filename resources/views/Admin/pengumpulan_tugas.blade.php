@@ -1,41 +1,51 @@
-<?php
-// Data pengumpulan tugas (bisa diganti dengan data dari database)
-$pengumpulan = [
-  "nama_tugas"    => "Peninggalan candi hindu budha",
-  "konten_tugas"  => "Sebutkan dan jelaskan sejarah tentang candi Hindu dan Budha.",
-  "jawaban_tugas" => "Candi Borobudur dibangun pada abad ke-8 oleh Dinasti Syailendra dan merupakan peninggalan agama Buddha. Candi Prambanan adalah candi Hindu terbesar di Indonesia dan dibangun pada abad ke-9 oleh Rakai Pikatan.",
-  "penilaian"     => "" // Kosong = belum dinilai
-];
-?>
+@extends('template.layout')
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Pengumpulan Tugas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@section('title', 'Tugas Pembelajaran')
 
-<section class="container my-5">
-  <div class="row g-4">
-    <div class="col-md-6">
-      <div class="feature-box text-start p-4 shadow rounded bg-light">
-        <h5>📤 Pengumpulan Tugas</h5>
-        <ul class="list-unstyled mt-3">
-          <li><strong>Nama Tugas:</strong> <?= htmlspecialchars($pengumpulan['nama_tugas']) ?></li>
-          <li><strong>Konten Tugas:</strong> <?= htmlspecialchars($pengumpulan['konten_tugas']) ?></li>
-          <li><strong>Jawaban Tugas:</strong><br> <?= nl2br(htmlspecialchars($pengumpulan['jawaban_tugas'])) ?></li>
-          <li><strong>Penilaian:</strong> 
-            <?= $pengumpulan['penilaian'] ? htmlspecialchars($pengumpulan['penilaian']) : '<em>(Belum dinilai)</em>' ?>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+@section('main')
+<div id="layoutSidenav">
+    @include('template.sidebar_admin')
+@endsection
+    <div id="layoutSidenav_content" style="padding-left: 20%;">
+        <main class="py-4 px-4">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">📝 Tugas Pembelajaran</h2>
+                    <a href="{{ route('CreatePengumpulanTugas') }}"" class="btn btn-primary">➕ Tambah Tugas</a>
+                </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+                <div class="card border-0 shadow-sm rounded">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover align-middle mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 30%;">Nama Tugas</th>
+                                        <th style="width: 45%;">Deskripsi</th>
+                                        <th style="width: 20%;">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Tugas 1: Ringkasan Materi candi borobudur</td>
+                                        <td>Candi Borobudur adalah candi Buddha terbesar di dunia, terletak di Magelang, Jawa Tengah. Dibangun pada abad ke-8 dan ke-9 oleh dinasti Syailendra. Diperkirakan sebagai tempat ibadah dan meditasi bagi umat Buddha.</td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="#" class="btn btn-sm btn-warning w-100">Edit</a>
+                                                <button class="btn btn-sm btn-danger w-100" onclick="return confirm('Hapus tugas ini?')">Hapus</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Tambahkan baris contoh lainnya di sini jika dibutuhkan -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    <div/>
+</div>

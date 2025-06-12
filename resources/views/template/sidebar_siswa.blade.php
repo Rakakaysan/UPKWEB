@@ -14,7 +14,7 @@
         
         /* Main layout container */
         .main-container {
-            display: fixed;
+            display: flex;
             padding-left: 400px;
             min-height: 100vh;
         }
@@ -142,27 +142,27 @@
     <h5 class="fw-bold mt-4 ps-3">Menu Admin</h5>
     <ul class="nav flex-column mt-3">
         <li class="nav-item">
-            <a href="{{ route('manajemen_pengguna') }}" 
-               class="nav-link {{ request()->routeIs('manajemen_pengguna') ? 'active' : '' }}">
-                <i class="fas fa-users me-2"></i> Manajemen Pengguna
+            <a href="{{ route('kompetisi') }}" 
+               class="nav-link {{ request()->routeIs('Kompetisi') ? 'active' : '' }}">
+                <i class="fas fa-users me-2"></i> Kompetensi & Tujuan
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('materi_pembelajaran') }}" 
-               class="nav-link {{ request()->routeIs('materi_pembelajaran') ? 'active' : '' }}">
-                <i class="fas fa-book me-2"></i> Materi Pembelajaran
+            <a href="{{ route('materi') }}" 
+               class="nav-link {{ request()->routeIs('materi') ? 'active' : '' }}">
+                <i class="fas fa-book me-2"></i> Materi 
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('pengumpulan_tugas') }}" 
-               class="nav-link {{ request()->routeIs('pengumpulan_tugas') ? 'active' : '' }}">
-                <i class="fas fa-info-circle me-2"></i> Pengumpulan Tugas
+            <a href="{{ route('tugas') }}" 
+               class="nav-link {{ request()->routeIs('tugas') ? 'active' : '' }}">
+                <i class="fas fa-info-circle me-2"></i> Tugas
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('tentang_aplikasi') }}" 
-               class="nav-link {{ request()->routeIs('tentang_aplikasi') ? 'active' : '' }}">
-                <i class="fas fa-mobile-alt me-2"></i> Tentang Aplikasi
+            <a href="{{ route('tentang_aplikasiSiswa') }}" 
+               class="nav-link {{ request()->routeIs('tentang_aplikasiSiswa') ? 'active' : '' }}">
+                <i class="fas fa-mobile-alt me-2"></i> Tentang Aplikasi & Pengembang
             </a>
         </li>
         <li class="nav-item mt-4">

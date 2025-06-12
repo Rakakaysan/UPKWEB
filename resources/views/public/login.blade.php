@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -22,26 +22,18 @@
       width: 100vw;
     }
     .left {
-    flex: 1;
-    background: linear-gradient(to bottom, #dba89f 0%, #e9cfc9 100%);
-    padding: 40px;
-    color: #5a0f0f;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-
+      flex: 1;
+      background: linear-gradient(to bottom, #dba89f 0%, #e9cfc9 100%);
+      padding: 40px;
+      color: #5a0f0f;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .left img.logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    height: 200px;
-    width: 150px;
-
-
-
+      width: 90px;
+      margin-bottom: 40px;
     }
     .left h1 {
       font-size: 64px;
@@ -176,18 +168,21 @@
       }
       .right form {
         max-width: 100%;
-      } 
+      }
     }
   </style>
 </head>
 <body>
   <div class="container" role="main">
-   <section class="left" aria-label="Welcome message and logo">
-  <img src="{{ asset('img/logo.png') }}" class="logo" alt="SIMBA Logo">
-  <h1>Hello,<br />Welcome!</h1>
-  <p class="desc"> 
-    Hello, welcome to SIMBA, Simba adalah singkatan dari 'Sistem Informasi Materi Candi Berbasis Aplikasi'
-  </p>
+    <section class="left" aria-label="Welcome message and logo">
+    <img src="{{ asset('img/logo.png') }}" class="logo" style="width: 390px; height: auto;" alt="SIMBA Logo">
+    
+    
+
+      <h1>Hello,<br />Welcome!</h1>
+      <p class="desc">
+        Hello, welcome to SIMBA, Simba adalah singkatan dari 'Sistem Informasi Materi Candi Berbasis Aplikasi'
+      </p>
       <svg class="bg-shape" viewBox="0 0 400 400">
         <path
           d="M100 350 Q150 300 200 350 T300 350 Q350 300 400 350 L400 400 L0 400 Z"
