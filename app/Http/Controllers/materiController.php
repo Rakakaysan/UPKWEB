@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\MateriPembelajaran;
+use App\Models\PengumpulanTugas;
 
 class MateriController extends Controller
 {
@@ -13,17 +13,28 @@ class MateriController extends Controller
      */
     public function materi_pembelajaran()
     {
-        $materi = MateriPembelajaran::all();
+        $materi = PengumpulanTugas::all();
         return view('Admin.materi_pembelajaran', ['materi' => $materi]);
     }
 
     /**
      * Menampilkan form untuk membuat materi baru
      */
-    public function CreateMateriPembelajaran()
+    public function CreatePengumpulanTugas()
     {
-        return view('Admin.create.create_materiPembelajaran');
+        return view('Admin.create.create_PengumpulanTugas');
     }
+
+
+    /**
+     * Menampilkan form untuk mengedit materi
+     */
+    public function edit($id)
+    {
+        $materi = PengumpulanTugas::findOrFail($id);
+        return view('Admin.update.edit_PengumpulanTugas', ['materi' => $materi]);
+    }
+
 
     /**
      * Menyimpan materi baru ke database
@@ -43,20 +54,11 @@ class MateriController extends Controller
                 ->withInput();
         }
 
-        MateriPembelajaran::create($request->all());
+        PengumpulanTugas::create($request->all());
 
         return redirect()
-            ->route('materi.index')
+            ->route('materi_pembelajaran')
             ->with('success', 'Materi berhasil ditambahkan!');
-    }
-
-    /**
-     * Menampilkan form untuk mengedit materi
-     */
-    public function EditMateriPembelajaran($id)
-    {
-        $materi = MateriPembelajaran::findOrFail($id);
-        return view('Admin.create.edit_materiPembelajaran', ['materi' => $materi]);
     }
 
     /**
@@ -77,11 +79,25 @@ class MateriController extends Controller
                 ->withInput();
         }
 
-        $materi = MateriPembelajaran::findOrFail($id);
+        $materi = PengumpulanTugas::findOrFail($id);
         $materi->update($request->all());
 
         return redirect()
-            ->route('materi.index')
+            ->route('materi_pembelajaran')
             ->with('success', 'Materi berhasil diperbarui!');
+    }
+
+    public function delete($id)
+    {
+        try {
+            $pengguna = PengumpulanTugas::findOrFail($id);
+            $pengguna->delete();
+
+            return redirect()->route('materi_pembelajaran')
+                ->with('success', 'Pengguna berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal menghapus pengguna: ' . $e->getMessage());
+        }
     }
 }

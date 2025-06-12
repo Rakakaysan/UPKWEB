@@ -13,15 +13,16 @@ class ManajemenPengguna extends Model
 
     protected $fillable = [
         'manajemen_id',
-        'nip',
-        'nama_lengkap',	
+        'nisn',
+        'nama_lengkap',
         'jabatan',
-        'status',	
+        'status',
         'username',
-        'password'	
+        'password'
 
     ];
-    public function setPasswordAttribute ($value) {
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = Hash::make($value);
     }
 }

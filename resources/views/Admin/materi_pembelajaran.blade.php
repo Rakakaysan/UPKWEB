@@ -3,8 +3,8 @@
 @section('title', 'Materi Pembelajaran')
 
 @section('main')
-<div id="layoutSidenav">
-    @include('template.sidebar_admin')
+    <div id="layoutSidenav">
+        @include('template.sidebar_admin')
 @endsection
     <div id="layoutSidenav_content" style="padding-left: 20%;">
         <main class="py-4 px-4">
@@ -17,40 +17,70 @@
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover align-middle mb-0">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th style="width: 5%;">#</th>
-                                        <th style="width: 25%;">Nama Materi</th>
-                                        <th style="width: 30%;">Deskripsi</th>
-                                        <th style="width: 20%;">URL YouTube</th>
-                                        <th style="width: 20%;">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Pengetahuan Tentang Candi di Indonesia</td>
-                                        <td>Candi di Indonesia adalah struktur bersejarah. Berikut adalah beberapa poin penting mengenai pengetahuan tentang candi di Indonesia:
+                            @isset($materi)
+                                @if($materi->isEmpty())
+                                    <div class="text-center py-8">
+                                        <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
+                                        <p class="text-gray-600">Belum ada data pengguna</p>
+                                    </div>
+                                @else
+                                    <table class="table table-striped table-hover align-middle mb-0">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th style="width: 5%;">#</th>
+                                                <th style="width: 25%;">Nama Materi</th>
+                                                <th style="width: 30%;">Deskripsi</th>
+                                                <th style="width: 20%;">URL YouTube</th>
+                                                <th style="width: 20%;">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($materi as $index => $materis)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $materis->nama_materi }}</td>
+                                                    <td>{{ $materis->konten_materi }}</td>
+                                                    <td>
+                                                        <a href="{{ $materis->url_youtube }}" target="_blank"
+                                                            class="btn btn-sm btn-primary">Tonton Video</a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex gap-2">
+                                                            <div class="">
+                                                                <a href="{{ route('materi.edit', ['id' => $materis->id_materi]) }}"
+                                                                    class="btn btn-sm btn-warning w-100">Edit</a>
+                                                            </div>
+                                                            <form action="{{ route('materi.delete2', $materis->id_materi) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger w-100">
+                                                                    <i class="fas fa-trash"></i> Hapus
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-                                            Sejarah dan Fungsi:
+                                            <!-- Tambahkan baris statis lainnya jika diperlukan -->
+                                        </tbody>
+                                    </table>
+                                @endif
+                            @else
+                                <div class="text-center py-8">
+                                    <i class="fas fa-exclamation-triangle text-4xl text-yellow-400 mb-4"></i>
+                                    <p class="text-gray-600">Data tidak tersedia</p>
+                                </div>
+                            @endisset
 
-                                            1. Candi umumnya dibangun sebagai tempat ibadah, terutama dalam agama Hindu dan Buddha.
-                                            2. Banyak candi yang juga berfungsi sebagai makam bagi raja atau tokoh penting.
-                                               Arsitektur:</td>
-                                        <td>
-                                            <a href="#" target="_blank" class="btn btn-sm btn-primary">Tonton Video</a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="btn btn-sm btn-warning w-100">Edit</a>
-                                                <button class="btn btn-sm btn-danger w-100" onclick="return confirm('Hapus materi ini?')">Hapus</button>
-                                            </div>
-                                           </td>
-                                    </tr>
-                                    <!-- Tambahkan baris statis lainnya jika diperlukan -->
-                                </tbody>
-                            </table>
+                            {{-- @if(isset($materi) && $materi->hasPages())
+                            <div class="mt-4">
+                                {{ $materi->links() }}
+                            </div>
+                            @endif --}}
+
                         </div>
                     </div>
                 </div>
@@ -59,4 +89,3 @@
         </main>
     </div>
 </div>
-

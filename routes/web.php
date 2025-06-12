@@ -45,3 +45,8 @@ Route::delete('/manajmenen-pengguna/{id}', [manajemenController::class, 'delete'
 Route::get('/manajemen-pengguna/{id}', [manajemenController::class, 'edit'])->name('edit');
 Route::put('/manajemen-pengguna/update/{id}', [manajemenController::class, 'update'])->name('manajemen-pengguna.update');
 Route::get('/materi/edit/{id}', [MateriController::class, 'edit'])->name('materi.edit');
+
+
+Route::post('/materi-pembelajaran/create', [materiController::class, 'store'])->name('materi.store2');
+Route::put('/materi-pembelajaran/edit2/{id}', [materiController::class, 'update'])->name('materi.edit2');
+Route::delete('/materi-pembelajaran/delete/{id}', [materiController::class, 'delete'])->name('materi.delete2');

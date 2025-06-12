@@ -73,7 +73,7 @@
                     <div class="col-span-full flex gap-4 mt-6">
                         <button class="bg-[#7a6a9a] text-white text-sm rounded-full py-2 px-6" type="submit">Update</button>
                         <a href="{{ route('manajemen_pengguna') }}" 
-                           class="bg-[#d9c9c1] text-[#4a3f3a] border border-[#a89f9a] text-sm rounded-full py-2 px-6 text-center">
+                        class="bg-[#d9c9c1] text-[#4a3f3a] border border-[#a89f9a] text-sm rounded-full py-2 px-6 text-center">
                             Cancel
                         </a>
                     </div>

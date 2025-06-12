@@ -3,15 +3,16 @@
 @section('title', 'Manajemen Pengguna')
 
 @section('main')
-<head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-</head>
 
-<div id="layoutSidenav">
-    @include('template.sidebar_admin')
-@endsection 
-    <div id="layoutSidenav_content" style="padding-left: 20%;"> 
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    </head>
+
+    <div id="layoutSidenav">
+        @include('template.sidebar_admin')
+@endsection
+    <div id="layoutSidenav_content" style="padding-left: 20%;">
         <main class="py-4 px-4">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -46,28 +47,28 @@
                                                     <td>{{ $user->nama_lengkap }}</td>
                                                     <td>{{ $user->username }}</td>
                                                     <td>{{ $user->jabatan }}</td>
-                                               <td>
-                                                        <span class="badge {{ $user->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
+                                                    <td>
+                                                        <span
+                                                            class="badge {{ $user->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
                                                             {{ $user->status }}
                                                         </span>
                                                     </td>
                                                     <td>
-                                                            <div class="d-flex gap-2">
-        <!-- Tombol Edit -->
-        <a href="{{ route('edit', $user->manajemen_id) }}" 
-           class="btn btn-sm btn-warning">
-            <i class="fas fa-edit"></i> Edit
-        </a>
+                                                        <div class="d-flex gap-2">
+                                                            <!-- Tombol Edit -->
+                                                            <a href="{{ route('edit', $user->manajemen_id) }}"
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="fas fa-edit"></i> Edit
+                                                            </a>
 
-                                                        <form action="{{ route('delete', $user->manajemen_id) }}" 
-                                                              method="POST" 
-                                                              onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger w-100">
-                                                                <i class="fas fa-trash"></i> Hapus
-                                                            </button>
-                                                        </form>
+                                                            <form action="{{ route('delete', $user->manajemen_id) }}" method="POST"
+                                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger w-100">
+                                                                    <i class="fas fa-trash"></i> Hapus
+                                                                </button>
+                                                            </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -93,4 +94,3 @@
         </main>
     </div>
 </div>
-

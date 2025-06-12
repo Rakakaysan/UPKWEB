@@ -59,8 +59,8 @@
                     <div class="flex flex-col">
                         <label class="mb-1 font-semibold" for="nip">NISN</label>
                         <input class="bg-[#f3ede9] rounded-full py-2 px-4 text-sm text-[#4a3f3a] focus:outline-none" 
-                            id="nip" name="nip" placeholder="NISN" type="text" 
-                            value="{{ old('nip') }}" required />
+                            id="nisn" name="nisn" placeholder="NISN" type="text" 
+                            value="{{ old('nisn') }}" required />
                     </div>
                     <div class="flex flex-col">
                         <label class="mb-1 font-semibold" for="username">Username</label>
