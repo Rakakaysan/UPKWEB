@@ -3,61 +3,94 @@
 @section('title', 'Manajemen Pengguna')
 
 @section('main')
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+</head>
+
 <div id="layoutSidenav">
     @include('template.sidebar_admin')
+@endsection 
+    <div id="layoutSidenav_content" style="padding-left: 20%;"> 
+        <main class="py-4 px-4">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">📘 Manajemen Pengguna</h2>
+                    <a href="{{ route('CreateManajemenPengguna') }}" class="btn btn-primary">➕ Tambah Pengguna</a>
+                </div>
+                <div class="card border-0 shadow-sm rounded">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @isset($pengguna)
+                                @if($pengguna->isEmpty())
+                                    <div class="text-center py-8">
+                                        <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
+                                        <p class="text-gray-600">Belum ada data pengguna</p>
+                                    </div>
+                                @else
+                                    <table class="table table-striped table-hover align-middle mb-0">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th style="width: 5%;">No</th>
+                                                <th style="width: 18%;">Nama Lengkap</th>
+                                                <th style="width: 12%;">Username</th>
+                                                <th style="width: 15%;">Jabatan</th>
+                                                <th style="width: 10%;">Status</th>
+                                                <th style="width: 20%;">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($pengguna as $index => $user)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $user->nama_lengkap }}</td>
+                                                    <td>{{ $user->username }}</td>
+                                                    <td>{{ $user->jabatan }}</td>
+                                               <td>
+                                                        <span class="badge {{ $user->status == 'Aktif' ? 'bg-success' : 'bg-danger' }}">
+                                                            {{ $user->status }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                            <div class="d-flex gap-2">
+        <!-- Tombol Edit -->
+        <a href="{{ route('edit', $user->manajemen_id) }}" 
+           class="btn btn-sm btn-warning">
+            <i class="fas fa-edit"></i> Edit
+        </a>
 
-    <div id="layoutSidenav_content">
-        <main class="container-fluid px-4 mt-4">
-            <h2 class="mb-4">👥 Manajemen Pengguna</h2>
+                                                        <form action="{{ route('delete', $user->manajemen_id) }}" 
+                                                              method="POST" 
+                                                              onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger w-100">
+                                                                <i class="fas fa-trash"></i> Hapus
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
+                            @else
+                                <div class="text-center py-8">
+                                    <i class="fas fa-exclamation-triangle text-4xl text-yellow-400 mb-4"></i>
+                                    <p class="text-gray-600">Data tidak tersedia</p>
+                                </div>
+                            @endisset
 
-            <div class="card shadow-sm rounded">
-                <div class="card-body">
-                    <table class="table table-striped table-hover align-middle">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Lengkap</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Jabatan</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pengguna as $i => $user)
-                            <tr>
-                                <td>{{ $i + 1 }}</td>
-                                <td>{{ $user->nama_lengkap }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->jabatan }}</td>
-                                <td>
-                                    <span class="badge bg-{{ $user->status == 'Aktif' ? 'success' : 'secondary' }}">
-                                        {{ $user->status }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.pengguna.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('admin.pengguna.destroy', $user->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Hapus pengguna ini?')" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-
-                            @if(count($pengguna) === 0)
-                            <tr>
-                                <td colspan="7" class="text-center text-muted">Tidak ada data pengguna.</td>
-                            </tr>
+                            @if(isset($pengguna) && $pengguna->hasPages())
+                                <div class="mt-4">
+                                    {{ $pengguna->links() }}
+                                </div>
                             @endif
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 </div>
-@endsection
+

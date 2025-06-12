@@ -1,4 +1,4 @@
-@extends('template.layout')
+@extends('template.sidebar_siswa')
 
 @section('title', 'Tentang Aplikasi')
 
