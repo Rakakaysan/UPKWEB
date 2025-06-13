@@ -16,6 +16,17 @@
 
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             @isset($materi)
                                 @if ($materi->isEmpty())
@@ -29,7 +40,7 @@
                                             <tr>
                                                 <th style="width: 5%;">#</th>
                                                 <th style="width: 25%;">Nama Materi</th>
-                                                <th style="width: 30%;">Deskripsi</th>
+                                                {{-- <th style="width: 30%;">Deskripsi</th> --}}
                                                 <th style="width: 20%;">URL YouTube</th>
                                                 <th style="width: 20%;">Aksi</th>
                                             </tr>
@@ -39,7 +50,7 @@
                                                 <tr>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $materis->nama_materi }}</td>
-                                                    <td>{{ $materis->konten_materi }}</td>
+                                                    {{-- <td>{{ $materis->konten_materi }}</td> --}}
                                                     <td>
                                                         <a href="{{ $materis->url_youtube }}" target="_blank"
                                                             class="btn btn-sm btn-primary">Tonton Video</a>
@@ -48,8 +59,8 @@
                                                         <div class="d-flex gap-2">
                                                             <div>
                                                                 <a href="{{ route('materi_pembelajaran.edit', ['id' => $materis->id_materi]) }}"
-                                                                    class="btn btn-sm btn-warning w-100"><i
-                                                                        class="fas fa-edit"></i>Edit</a>
+                                                                    class="btn btn-sm btn-warning w-100">
+                                                                    <i class="fas fa-edit"></i>Edit</a>
                                                             </div>
                                                             <form
                                                                 action="{{ route('materi_pembelajaran.delete', $materis->id_materi) }}"

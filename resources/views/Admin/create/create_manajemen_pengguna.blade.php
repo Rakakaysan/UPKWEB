@@ -25,6 +25,17 @@
                             </div>
                         @endif
 
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form class="grid grid-cols-1 sm:grid-cols-2 gap-6" method="POST"
                             action="{{ route('manajemen_pengguna.store') }}">
                             @method('POST')

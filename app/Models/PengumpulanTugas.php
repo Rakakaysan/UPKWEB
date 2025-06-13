@@ -15,8 +15,18 @@ class PengumpulanTugas extends Model
         'id_tugas',
         'id_user',
         'jawaban_tugas',
-        'tanggal_pungumpulan',
+        'tanggal_pengumpulan',
         'nilai',
         'tanggal_penilaian',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(ManajemenPengguna::class, 'id_user', 'id');
+    }
+
+    public function tugas()
+    {
+        return $this->belongsTo(Tugas::class, "id_tugas", "id_tugas");
+    }
 }

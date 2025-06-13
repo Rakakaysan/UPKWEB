@@ -47,7 +47,7 @@ class ManajemenController extends Controller
 
         try {
             ManajemenPengguna::create([
-                'manajemen_id' => Str::uuid()->toString(),
+                'id' => Str::uuid()->toString(),
                 'nisn' => $request->nisn,
                 'nama_lengkap' => $request->nama_lengkap,
                 'jabatan' => $request->jabatan,
@@ -69,8 +69,8 @@ class ManajemenController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_lengkap' => 'required|string|max:255',
-            'nisn' => 'required|string|max:255|unique:manajemen_pengguna,nisn,' . $id . ',manajemen_id',
-            'username' => 'required|string|max:255|unique:manajemen_pengguna,username,' . $id . ',manajemen_id',
+            'nisn' => 'required|string|max:255|unique:manajemen_pengguna,nisn,' . $id . ',id',
+            'username' => 'required|string|max:255|unique:manajemen_pengguna,username,' . $id . ',id',
             'jabatan' => 'required|string|max:255',
             'password' => 'nullable|string|min:8|confirmed',
             'status' => 'required|in:Aktif,Tidak Aktif'

@@ -18,4 +18,10 @@ class Tugas extends Model
         "tanggal_dibuat",
         "tanggal_diubah",
     ];
+
+
+    public function pengumpulan()
+    {
+        return $this->hasOne(PengumpulanTugas::class, "id_tugas", "id_tugas");
+    }
 }

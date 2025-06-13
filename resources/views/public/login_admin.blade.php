@@ -302,7 +302,7 @@
         <section class="left" aria-labelledby="welcome-heading">
             <img src="{{ asset('img/logo.png') }}" class="logo" style="width: 220px; height: auto;" alt="SIMBA Logo">
 
-            <h1 id="welcome-heading">Selamat Datang di SIMBA</h1>
+            <h1 id="welcome-heading">Selamat Datang Admin!</h1>
             <p class="desc">
                 Ayo Buka 'Sistem Informasi Materi Candi Berbasis Aplikasi'. Jelajahi kekayaan sejarah dan informasi
                 tentang candi-candi kuno.
@@ -311,11 +311,11 @@
 
         <section class="right" aria-label="Login form">
             <div class="form-container">
-                <form action="{{ route('login.action') }}" method="POST">
+                <form action="{{ route('login.admin.action') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <h2>Masuk</h2>
-                    <p>Masukan username dan password anda untuk mengakses SIMBA.</p>
+                    <h2>ADMIN LOGIN Masuk</h2>
+                    <p>Masukan username dan password anda untuk mengakses SIMBA Admin.</p>
 
                     <div class="input-group">
                         <input id="username" class="input-field" name="username" placeholder="username" required

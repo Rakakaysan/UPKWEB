@@ -15,13 +15,14 @@ return new class extends Migration
 
         Schema::create('pengumpulan_tugas', function (Blueprint $table) {
             $table->bigIncrements('id_pengumpulan');
-            $table->unsignedBigInteger(column: 'id_tugas');
+            $table->unsignedBigInteger('id_tugas');
             $table->foreign('id_tugas')->references('id_tugas')->on('tugas')->onDelete('cascade')->onUpdate('cascade');
-            $table->bigInteger('id_user');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('manajemen_pengguna')->onDelete('cascade')->onUpdate('cascade');
             $table->longText('jawaban_tugas');
-            $table->tinyInteger('nilai');
+            $table->tinyInteger('nilai')->nullable();
             $table->dateTime('tanggal_pengumpulan');
-            $table->dateTime('tanggal_penilaian');
+            $table->dateTime('tanggal_penilaian')->nullable();
         });
 
         Schema::enableForeignKeyConstraints();

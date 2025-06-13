@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('materi_pembelajaran', function (Blueprint $table) {
             $table->increments('id_materi');
             $table->string('nama_materi');
-            $table->string('konten_materi');
+            $table->longText('konten_materi');
             $table->string('url_youtube');
         });
     }

@@ -13,19 +13,20 @@ class ManajemenPengguna extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = "manajemen_pengguna";
-    protected $primaryKey = "manajemen_id";
+    protected $primaryKey = "id";
     protected $keyType = "string";
 
     protected $fillable = [
-        'manajemen_id',
+        'id',
         'nisn',
         'nama_lengkap',
         'jabatan',
         'status',
         'username',
         'password'
-
     ];
+
+    // public $incrementing = false;
 
     // public function getAuthPassword()
     // {
@@ -33,9 +34,19 @@ class ManajemenPengguna extends Authenticatable
     //     return $this->password;
     // }
 
+    // public function getAuthIdentifier()
+    // {
+    //     return $this->getKey();
+    // }
+
+    protected $hidden = [
+        'password',
+    ];
+
     protected function casts(): array
     {
         return [
+            // 'id' => 'string',
             'password' => 'hashed',
         ];
     }

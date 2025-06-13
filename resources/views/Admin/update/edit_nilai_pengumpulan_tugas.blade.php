@@ -11,7 +11,7 @@
         <main class="py-4 px-4">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">📚 Edit Materi Pembelajaran</h2>
+                    <h2 class="mb-0">🚓 Penilaian Tugas</h2>
                 </div>
 
                 <div class="card border-0 shadow-sm rounded">
@@ -27,32 +27,38 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('materi_pembelajaran.update', ['id' => $materi->id_materi]) }}"
+                        <form action="{{ route('pengumpulan_tugas.nilai', ['id' => $pengumpulan->id_pengumpulan]) }}"
                             method="POST">
                             @method('PUT')
                             @csrf
                             <div class="mb-3">
-                                <label for="judul" class="form-label">Judul Materi</label>
-                                <input value="{{ $materi->nama_materi }}" type="text" name="nama_materi"
-                                    id="judul" class="form-control" placeholder="Masukkan judul materi" required>
+                                <label class="form-label">Soal Tugas</label>
+                                <textarea disabled rows="4" class="form-control">{{ $pengumpulan->tugas->deskripsi_tugas }}</textarea>
                             </div>
 
                             <div class="mb-3">
-                                <label for="deskripsi" class="form-label">Konten Materi</label>
-                                <textarea name="konten_materi" id="deskripsi" rows="4" class="form-control"
-                                    placeholder="Masukkan deskripsi materi..." required>{{ $materi->konten_materi }}</textarea>
+                                <label class="form-label">Jawaban Siswa</label>
+                                <textarea disabled rows="4" class="form-control">{{ $pengumpulan->jawaban_tugas }}</textarea>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="tautan_video" class="form-label">Tautan Video</label>
-                                <input value="{{ $materi->url_youtube }}" type="url" name="url_youtube"
-                                    id="tautan_video" class="form-control" placeholder="https://youtube.com/..."
-                                    required>
-                            </div>
+                            @if ($pengumpulan->nilai)
+                                <div class="mb-3">
+                                    <label for="nilai" class="form-label">Nilai</label>
+                                    <input value="{{ $pengumpulan->nilai }}" type="number" name="nilai"
+                                        id="nilai" class="form-control" placeholder="0-100" required>
+                                </div>
+                            @else
+                                <div class="mb-3">
+                                    <label for="nilai" class="form-label">Nilai</label>
+                                    <input type="number" name="nilai" id="nilai" class="form-control"
+                                        placeholder="0-100" required>
+                                </div>
+                            @endif
+
 
                             <div class="d-flex gap-3">
                                 <button type="submit" class="btn btn-primary">💾 Simpan</button>
-                                <a href="{{ route('materi_pembelajaran.index') }}" class="btn btn-secondary">❌ Batal</a>
+                                <a href="{{ route('pengumpulan_tugas.index') }}" class="btn btn-secondary">❌ Batal</a>
                             </div>
                         </form>
                     </div>

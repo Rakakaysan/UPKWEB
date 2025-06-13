@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manajemenpengumpulan;
+use App\Models\PengumpulanTugas;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PengumpulanController extends Controller
 {
-    public function pengumpulan_tugas()
+    public function index()
     {
-        return view('admin.pengumpulan_tugas');
+        $pengumpulan = PengumpulanTugas::with(["user", "tugas"])->orderBy(column: 'nilai')->paginate(10);
+
+
+        // return $pengumpulan;
+
+        return view('admin.pengumpulan_tugas', [
+            'pengumpulan' => $pengumpulan
+        ]);
     }
-    public function CreatePengumpulanTugas()
+
+    public function edit($id)
     {
-        return view('admin.create.create_PengumpulanTugas');
-    }
-    public function EditPengumpulanTugasp()
-    {
-        return view('admin.create.Edit_pengumpulanTugas');
+        $pengumpulan = PengumpulanTugas::findOrFail($id);
+
+        return view('admin.update.edit_nilai_pengumpulan_tugas', ["pengumpulan" => $pengumpulan]);
     }
 
 
-    /**
-     * Menyimpan materi baru ke database
-     */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+
+        $tugas = Tugas::findOrFail($id);
+        $user = auth("web")->user();
+
         $validator = Validator::make($request->all(), [
-            'nama_materi' => 'required|string|max:255',
-            'konten_materi' => 'required|string',
-            'url_youtube' => 'required|url|max:255',
+            'jawaban_tugas' => 'required|max:65536',
         ]);
 
         if ($validator->fails()) {
@@ -38,47 +47,55 @@ class PengumpulanController extends Controller
                 ->withInput();
         }
 
-        MateriPembelajaran::create($request->all());
+        PengumpulanTugas::create([
+            ...$request->all(),
+            'id_tugas' => $tugas->id_tugas,
+            'id_user' =>  $user->id,
+            'tanggal_pengumpulan' => now()
+
+        ]);
 
         return redirect()
-            ->route('materi_pembelajaran')
-            ->with('success', 'Materi berhasil ditambahkan!');
+            ->route('siswa.tugas')
+            ->with('success', 'Tugas berhasil dikumpulkan!');
     }
 
-    /**
-     * Mengupdate materi di database
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_materi' => 'required|string|max:255',
-            'konten_materi' => 'required|string',
-            'url_youtube' => 'required|url|max:255',
+            'nilai' => 'required|numeric|min:0|max:100',
         ]);
 
         if ($validator->fails()) {
-            return redirect()
-                ->back()
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $materi = MateriPembelajaran::findOrFail($id);
-        $materi->update($request->all());
+        try {
+            $pengumpulan = PengumpulanTugas::findOrFail($id);
+            $pengumpulan->update([
+                ...$request->all(),
+                "tanggal_penilaian" => now()
+            ]);
 
-        return redirect()
-            ->route('materi_pembelajaran')
-            ->with('success', 'Materi berhasil diperbarui!');
+            return redirect()->route('pengumpulan_tugas.index')
+                ->with('success', 'Tugas siswa berhasil dinilai!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal menilai: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
     public function delete($id)
     {
         try {
-            $pengguna = MateriPembelajaran::findOrFail($id);
+            $pengguna = PengumpulanTugas::findOrFail($id);
             $pengguna->delete();
 
-            return redirect()->route('materi_pembelajaran')
-                ->with('success', 'Pengguna berhasil dihapus');
+            return redirect()->route('pengumpulan_tugas.index')
+                ->with('success', 'Pengumpulan berhasil dihapus');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Gagal menghapus pengguna: ' . $e->getMessage());
