@@ -15,6 +15,17 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             @isset($pengguna)
                                 @if ($pengguna->isEmpty())
@@ -50,13 +61,13 @@
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <div>
-                                                                <a href="{{ route('manajemen_pengguna.edit', ['id' => $user->manajemen_id]) }}"
+                                                                <a href="{{ route('manajemen_pengguna.edit', ['id' => $user->id]) }}"
                                                                     class="btn btn-sm btn-warning">
                                                                     <i class="fas fa-edit"></i> Edit
                                                                 </a>
                                                             </div>
                                                             <form
-                                                                action="{{ route('manajemen_pengguna.delete', ['id' => $user->manajemen_id]) }}"
+                                                                action="{{ route('manajemen_pengguna.delete', ['id' => $user->id]) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">
                                                                 @csrf

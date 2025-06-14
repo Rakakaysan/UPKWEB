@@ -11,7 +11,7 @@ class TugasController extends Controller
     // view
     public function index()
     {
-        $tugas = Tugas::orderBy('nama_tugas')->paginate(10);
+        $tugas = Tugas::orderBy(column: 'nama_tugas')->paginate(10);
         return view('admin.tugas', ['tugas' => $tugas]);
     }
 
